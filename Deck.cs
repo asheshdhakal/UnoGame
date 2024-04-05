@@ -1,16 +1,17 @@
-﻿using System.Collections.Generic;
 using System;
-using UnoGame;
+using System.Collections.Generic;
 using System.Linq;
 
 public class Deck
 {
     private List<Card> cards;
+    private List<Card> playedCards;
     private Random random = new Random();
 
     public Deck()
     {
         cards = new List<Card>();
+        playedCards = new List<Card>();
         InitializeCards();
         ShuffleCards();
     }
@@ -54,8 +55,36 @@ public class Deck
         cards = cards.OrderBy(c => random.Next()).ToList();
     }
 
+    public void RemoveClass(string color)
+    {
+        cards.RemoveAll(card => card.Color == color);
+    }
+
+    public void DistributeCards(List<Player> players, int numberOfCards)
+    {
+        foreach (var player in players)
+        {
+            for (int i = 0; i < numberOfCards; i++)
+            {
+                var card = Draw();
+                if (card != null)
+                    player.AddCardToHand(card);
+            }
+        }
+    }
+
+    public void AddToPlayedCards(Card card)
+    {
+        playedCards.Add(card);
+    }
+
     public Card Draw()
     {
+        if (!cards.Any())
+        {
+            RefillDeckFromPlayedCards();
+        }
+
         if (cards.Any())
         {
             var card = cards.First();
@@ -63,5 +92,19 @@ public class Deck
             return card;
         }
         return null;
+    }
+
+    private void RefillDeckFromPlayedCards()
+    {
+        if (playedCards.Any())
+        {
+            cards.AddRange(playedCards);
+            playedCards.Clear();
+            ShuffleCards();
+        }
+        else
+        {
+            Console.WriteLine("No cards left to refill the deck.");
+        }
     }
 }
