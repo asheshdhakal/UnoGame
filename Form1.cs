@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -11,10 +11,19 @@ namespace UnoGame
         private Deck deck;
         private List<Player> players;
         private const int CardsPerPlayer = 7;
-        private string cardBackImagePath = @"C:\Users\dhaka\source\repos\UnoGame\Resources\uno_card-back.png";
+        private string cardBackImagePath = @"Resources\uno_card-back.png";
         private Card currentCard;
         private Player currentPlayer;
-       
+
+        public enum SpecialCardValue
+        {
+            Skip,
+            Reverse,
+            Draw2,
+            Wild,
+            Draw4
+        }
+
         public Form1()
         {
        
@@ -87,6 +96,7 @@ namespace UnoGame
             DisplayCurrentCard(currentCard);
 
             currentPlayer = players[0];
+            PlayGame();
 
             DisplayCards();
         }
@@ -128,10 +138,13 @@ namespace UnoGame
                 if (currentPlayer.IsHuman)
                 {
                     HandleHumanPlayerTurn();
+                    
                 }
                 else
                 {
+                    
                     HandleComputerPlayerTurn(currentPlayer);
+                    //currentPlayer = players[3];
                 }
 
                 // Check if the game is over
@@ -147,6 +160,8 @@ namespace UnoGame
                 currentPlayer = players[currentPlayerIndex];
             }
         }
+
+
 
         private void HandleHumanPlayerTurn()
         {
@@ -179,6 +194,7 @@ namespace UnoGame
             {
                 // Get the index of the clicked card in the human player's hand
                 int cardIndex = int.Parse(clickedPictureBox.Name.Substring(clickedPictureBox.Name.Length - 1)) - 1;
+                System.Console.WriteLine(cardIndex);
                 Card selectedCard = players[0].Hand[cardIndex];
 
                 // Play the selected card if it's valid
@@ -200,7 +216,7 @@ namespace UnoGame
 
         private void HandleComputerPlayerTurn(Player player)
         {
-            Card validCard = FindValidCard(player.Hand, currentCard);
+            Card validCard = findValidCard(player.Hand, currentCard);
             if (validCard != null)
             {
                 PlayCard(player, validCard);
@@ -250,36 +266,31 @@ namespace UnoGame
         }
         private void HandleSpecialCardEffects(Card card)
         {
-            switch (card.Value)
+            private void HandleSpecialCardEffects(Card card)
             {
-                case "skip":
-                    SwitchToNextPlayer();
-                    break;
-                case "reverse":
-                    ReversePlayerOrder();
-                    break;
-                case "draw2":
-                    DrawCardsForNextPlayer(2);
-                    SwitchToNextPlayer();
-                    break;
-                case "wild":
-                    // Prompt the player to choose a new color
-                    ColorDialog colorDialog = new ColorDialog();
-                    if (colorDialog.ShowDialog() == DialogResult.OK)
-                    {
-                        card.Color = colorDialog.Color.Name;
-                    }
-                    break;
-                case "draw4":
-                    DrawCardsForNextPlayer(4);
-                    SwitchToNextPlayer();
-                    // Prompt the player to choose a new color
-                    ColorDialog colorDialog2 = new ColorDialog();
-                    if (colorDialog2.ShowDialog() == DialogResult.OK)
-                    {
-                        card.Color = colorDialog2.Color.Name;
-                    }
-                    break;
+                switch (card.Value)
+                {
+                    case SpecialCardValue.Skip:
+                        SwitchToNextPlayer();
+                        break;
+                    case SpecialCardValue.Reverse:
+                        ReversePlayerOrder();
+                        break;
+                    case SpecialCardValue.Draw2:
+                        DrawCardsForNextPlayer(2);
+                        SwitchToNextPlayer();
+                        break;
+                    case SpecialCardValue.Wild:
+                        // Prompt the player to choose a new color
+                        ChooseNewColor(card);
+                        break;
+                    case SpecialCardValue.Draw4:
+                        DrawCardsForNextPlayer(4);
+                        SwitchToNextPlayer();
+                        // Prompt the player to choose a new color
+                        ChooseNewColor(card);
+                        break;
+                }
             }
         }
 
@@ -308,7 +319,7 @@ namespace UnoGame
 
 
     
-        private Card FindValidCard(List<Card> hand, Card currentCard)
+        private Card findValidCard(List<Card> hand, Card currentCard)
         {
             // Implement the logic to find a valid card based on the Uno game rules
             // Check if any card in the player's hand matches the current card's color or value
@@ -323,7 +334,37 @@ namespace UnoGame
             return null;
         }
 
-        
+        private void MoveToNextPlayer()
+        {
+            int index = players.IndexOf(currentPlayer);
+            index = (index + 1) % players.Count;
+            currentPlayer = players[index];
+        }
+
+        private void MoveToPreviousPlayer()
+        {
+            int index = players.IndexOf(currentPlayer);
+            index = (index - 1 + players.Count) % players.Count;
+            currentPlayer = players[index];
+        }
+
+        private UnoPlayer GetNextPlayer()
+        {
+            int index = players.IndexOf(currentPlayer);
+            index = (index + 1) % players.Count;
+            return players[index];
+        }
+
+        private bool CheckGameOver()
+        {
+            foreach (UnoPlayer player in players)
+            {
+                if (player.Hand.Count == 0)
+                    return true;
+            }
+            return false;
+        }
+
         private bool CheckGameOver()
         {
             // Implement the logic to check if the game is over
@@ -339,7 +380,20 @@ namespace UnoGame
             return false;
         }
 
-        
+        private void pictureBoxPlayer1Card1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBoxCurrentCard_Click(object sender, EventArgs e)
+        {
+            HandleHumanPlayerTurn();
+        }
+
+        private void panelPlayer1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 
     // Other classes remain the same as provided
