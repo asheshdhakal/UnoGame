@@ -1,0 +1,78 @@
+using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
+
+public class UnoGame
+{
+    private List<UnoPlayer> players;
+    private UnoPlayer currentPlayer;
+
+    public UnoGame(params string[] playerNames)
+    {
+        if (playerNames.Length < 2 || playerNames.Length > 10)
+            throw new ArgumentException("Number of players must be between 2 and 10");
+
+        players = new List<UnoPlayer>();
+        foreach (string name in playerNames)
+        {
+            if (name == "Computer")
+                players.Add(new ComputerPlayer(name));
+            else
+                players.Add(new UnoPlayer(name));
+        }
+
+        // Set the first player as the current player
+        currentPlayer = players[0];
+    }
+
+    public void StartGame()
+    {
+        Console.WriteLine("Starting Uno Game!");
+
+        // Enable the panel view for the current player
+        EnablePlayerPanel(currentPlayer);
+
+        // Sample turn for the computer player
+        if (currentPlayer is ComputerPlayer)
+        {
+            UnoCard cardToPlay = ((ComputerPlayer)currentPlayer).ChooseCardToPlay();
+            if (cardToPlay != null)
+            {
+                Console.WriteLine($"{currentPlayer.Name} played: {cardToPlay.Color} {cardToPlay.Type} {cardToPlay.Number}");
+                currentPlayer.Hand.Remove(cardToPlay);
+                // Add further game logic here...
+            }
+            else
+            {
+                Console.WriteLine($"{currentPlayer.Name} draws a card.");
+                currentPlayer.DrawCard();
+                // Add further game logic here...
+            }
+        }
+    }
+
+    private void EnablePlayerPanel(UnoPlayer player)
+    {
+        // Enable the panel view for the specified player
+        string panelName = $"panel{player.Name}";
+        Panel panel = GetPanelByName(panelName);
+        panel.Enabled = true;
+    }
+
+    private void DisableAllPlayerPanels()
+    {
+        // Disable panel views for all players
+        foreach (UnoPlayer player in players)
+        {
+            string panelName = $"panel{player.Name}";
+            Panel panel = GetPanelByName(panelName);
+            panel.Enabled = false;
+        }
+    }
+
+    private Panel GetPanelByName(string name)
+    {
+        // Retrieve panel by name (assumes controls are directly under the form)
+        return Application.OpenForms["YourFormName"].Controls.Find(name, true).FirstOrDefault() as Panel;
+    }
+}
