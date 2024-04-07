@@ -16,5 +16,7 @@ public class Player
     {
         var card = deck.Draw();
         if (card != null) Hand.Add(card);
+       
+
     }
 }
