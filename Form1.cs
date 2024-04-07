@@ -8,21 +8,17 @@ namespace UnoGame
 {
     public partial class Form1 : Form
     {
-        private Deck deck;
+        private Deck deck = new Deck();
         private List<Player> players;
         private const int CardsPerPlayer = 7;
         private string cardBackImagePath = @"Resources\uno_card-back.png";
         private Card currentCard;
         private Player currentPlayer;
 
-        public enum SpecialCardValue
-        {
-            Skip,
-            Reverse,
-            Draw2,
-            Wild,
-            Draw4
-        }
+       
+
+    
+
 
         public Form1()
         {
@@ -30,10 +26,47 @@ namespace UnoGame
 
             InitializeComponent();
             InitializeGame();
-       
+            initgae();
             //CreateUI(); // Call the method that creates the UI
         }
 
+        private void initgae()
+        {
+
+            foreach (var player in players)
+            {
+                player.Hand.Clear(); // Clear any existing cards
+
+                for (int i = 0; i < CardsPerPlayer; i++)
+                {
+                    player.DrawCard(deck);
+                }
+            }
+
+
+            // Get the first card from the playedCards list
+            Card currentCard = deck.playedCards.First();
+
+
+
+            DisplayCurrentCard(currentCard);
+            DisplayCurrentCardDeck(deck.getFirstCard());
+            currentPlayer = players[0];
+            //PlayGame();
+            DisplayCards();
+
+
+            for (int i = 0; i < players[0].Hand.Count; i++)
+            {
+                string pictureBoxName = $"pictureBoxPlayer1Card{i + 1}";
+                PictureBox pictureBox = Controls.Find(pictureBoxName, true).FirstOrDefault() as PictureBox;
+                if (pictureBox != null)
+                {
+                    pictureBox.Enabled = true;
+                    pictureBox.Click += PictureBox_Click; // Subscribe to the Click event
+                }
+            }
+        }
 
 
         private PictureBox CreateCardPictureBox(string name, int x, int y)
@@ -50,6 +83,13 @@ namespace UnoGame
         {
             pictureBoxCurrentCard.Image = Image.FromFile(card.ImageName);
         }
+
+        private void DisplayCurrentCardDeck(Card card)
+        {
+            pictureBoxRenewCard.Image = Image.FromFile(card.ImageName);
+        }
+
+  
         private void InitializeGame()
         {
             players = new List<Player>();
@@ -58,7 +98,9 @@ namespace UnoGame
             {
                 players.Add(new Player(false)); // Computer players
             }
-      
+
+            Console.WriteLine(players.Count);
+          
         }
         private bool CanPlayCard(Card selectedCard, Card currentCard)
         {
@@ -78,28 +120,6 @@ namespace UnoGame
             pictureBoxCurrentCard.Image = Image.FromFile(card.ImageName);
         }
 
-        private void buttonDealCards_Click_1(object sender, EventArgs e)
-        {
-            deck = new Deck(); // Initialize the deck
-
-            foreach (var player in players)
-            {
-                player.Hand.Clear(); // Clear any existing cards
-
-                for (int i = 0; i < CardsPerPlayer; i++)
-                {
-                    player.DrawCard(deck);
-                }
-            }
-
-            currentCard = deck.Draw();
-            DisplayCurrentCard(currentCard);
-
-            currentPlayer = players[0];
-            PlayGame();
-
-            DisplayCards();
-        }
 
 
         private void DisplayCards()
@@ -124,7 +144,7 @@ namespace UnoGame
                     var pictureBox = Controls.Find(pictureBoxName, true).FirstOrDefault() as PictureBox;
                     if (pictureBox != null)
                     {
-                        pictureBox.Image = Image.FromFile(cardBackImagePath);
+                        pictureBox.Image = Image.FromFile(players[playerIndex].Hand[cardIndex].ImageName);
                     }
                 }
             }
@@ -166,51 +186,33 @@ namespace UnoGame
         private void HandleHumanPlayerTurn()
         {
             // Disable all card picture boxes initially
-            foreach (Control control in Controls)
-            {
-                PictureBox pictureBox = control as PictureBox;
-                if (pictureBox != null && pictureBox.Name.StartsWith("pictureBoxPlayer1Card"))
-                {
-                    pictureBox.Enabled = false;
-                }
-            }
+            
 
             // Enable the picture boxes corresponding to the human player's cards
-            for (int i = 0; i < players[0].Hand.Count; i++)
-            {
-                string pictureBoxName = $"pictureBoxPlayer1Card{i + 1}";
-                PictureBox pictureBox = Controls.Find(pictureBoxName, true).FirstOrDefault() as PictureBox;
-                if (pictureBox != null)
-                {
-                    pictureBox.Enabled = true;
-                    pictureBox.Click += PictureBox_Click; // Subscribe to the Click event
-                }
-            }
+           
         }
         private void PictureBox_Click(object sender, EventArgs e)
         {
+            Console.WriteLine("I am clicked");
             PictureBox clickedPictureBox = sender as PictureBox;
             if (clickedPictureBox != null)
             {
                 // Get the index of the clicked card in the human player's hand
                 int cardIndex = int.Parse(clickedPictureBox.Name.Substring(clickedPictureBox.Name.Length - 1)) - 1;
-                System.Console.WriteLine(cardIndex);
+                Console.WriteLine(cardIndex);
                 Card selectedCard = players[0].Hand[cardIndex];
 
                 // Play the selected card if it's valid
-                if (CanPlayCard(selectedCard, currentCard))
-                {
+              
                     PlayCard(players[0], selectedCard);
                     currentCard = selectedCard;
                     pictureBoxCurrentCard.Image = Image.FromFile(currentCard.ImageName);
                     HandleSpecialCardEffects(selectedCard); // Handle special card effects
                     SwitchToNextPlayer();
-                }
-                else
-                {
-                    MessageBox.Show("Invalid card. Please select a valid card or draw a card from the deck.");
-                }
+          
             }
+            Console.WriteLine("This is for normal deck",deck.cards.Count);
+            Console.WriteLine(deck.playedCards.Count);
 
         }
 
@@ -233,6 +235,7 @@ namespace UnoGame
         }
         private void PlayCard(Player player, Card card)
         {
+            deck.playedCards.Add(card);
             player.Hand.Remove(card);
             UpdateCardDisplay(player);
         }
@@ -266,33 +269,39 @@ namespace UnoGame
         }
         private void HandleSpecialCardEffects(Card card)
         {
-            private void HandleSpecialCardEffects(Card card)
+            switch (card.Value)
             {
-                switch (card.Value)
+
+           case "skip":
+                SwitchToNextPlayer();
+                break;
+            case "reverse":
+                ReversePlayerOrder();
+                break;
+            case "draw2":
+                DrawCardsForNextPlayer(2);
+                SwitchToNextPlayer();
+                break;
+            case "wild":
+                // Prompt the player to choose a new color
+                ColorDialog colorDialog = new ColorDialog();
+                if (colorDialog.ShowDialog() == DialogResult.OK)
                 {
-                    case SpecialCardValue.Skip:
-                        SwitchToNextPlayer();
-                        break;
-                    case SpecialCardValue.Reverse:
-                        ReversePlayerOrder();
-                        break;
-                    case SpecialCardValue.Draw2:
-                        DrawCardsForNextPlayer(2);
-                        SwitchToNextPlayer();
-                        break;
-                    case SpecialCardValue.Wild:
-                        // Prompt the player to choose a new color
-                        ChooseNewColor(card);
-                        break;
-                    case SpecialCardValue.Draw4:
-                        DrawCardsForNextPlayer(4);
-                        SwitchToNextPlayer();
-                        // Prompt the player to choose a new color
-                        ChooseNewColor(card);
-                        break;
+                    card.Color = colorDialog.Color.Name;
                 }
+                break;
+            case "draw4":
+                DrawCardsForNextPlayer(4);
+                SwitchToNextPlayer();
+                // Prompt the player to choose a new color
+                ColorDialog colorDialog2 = new ColorDialog();
+                if (colorDialog2.ShowDialog() == DialogResult.OK)
+                {
+                    card.Color = colorDialog2.Color.Name;
+                }
+                break;
             }
-        }
+            }
 
         private void DrawCardsForNextPlayer(int numCards)
         {
@@ -334,51 +343,15 @@ namespace UnoGame
             return null;
         }
 
-        private void MoveToNextPlayer()
-        {
-            int index = players.IndexOf(currentPlayer);
-            index = (index + 1) % players.Count;
-            currentPlayer = players[index];
-        }
-
-        private void MoveToPreviousPlayer()
-        {
-            int index = players.IndexOf(currentPlayer);
-            index = (index - 1 + players.Count) % players.Count;
-            currentPlayer = players[index];
-        }
-
-        private UnoPlayer GetNextPlayer()
-        {
-            int index = players.IndexOf(currentPlayer);
-            index = (index + 1) % players.Count;
-            return players[index];
-        }
+     
 
         private bool CheckGameOver()
         {
-            foreach (UnoPlayer player in players)
-            {
-                if (player.Hand.Count == 0)
-                    return true;
-            }
+           
             return false;
         }
 
-        private bool CheckGameOver()
-        {
-            // Implement the logic to check if the game is over
-            // Check if any player has no cards left in their hand
-            foreach (Player player in players)
-            {
-                if (player.Hand.Count == 0)
-                {
-                    // Game is over, handle the winner logic
-                    return true;
-                }
-            }
-            return false;
-        }
+      
 
         private void pictureBoxPlayer1Card1_Click(object sender, EventArgs e)
         {
@@ -387,10 +360,22 @@ namespace UnoGame
 
         private void pictureBoxCurrentCard_Click(object sender, EventArgs e)
         {
-            HandleHumanPlayerTurn();
+           
         }
 
         private void panelPlayer1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void pictureBoxRenewCard_Click(object sender, EventArgs e)
+        {
+            currentPlayer.Hand.Add(deck.Draw());
+            Console.WriteLine(currentPlayer.Hand.Count);
+            UpdateCardDisplay(currentPlayer);
+        }
+
+        private void pictureBoxCurrentCard_Click_1(object sender, EventArgs e)
         {
 
         }

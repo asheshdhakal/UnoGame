@@ -1,11 +1,12 @@
-using System;
 using System.Collections.Generic;
+using System;
+using UnoGame;
 using System.Linq;
 
 public class Deck
 {
-    private List<Card> cards;
-    private List<Card> playedCards;
+    public List<Card> cards;
+    public List<Card> playedCards;
     private Random random = new Random();
 
     public Deck()
@@ -14,6 +15,7 @@ public class Deck
         playedCards = new List<Card>();
         InitializeCards();
         ShuffleCards();
+        PopulateFirstCrad();
     }
 
     private void InitializeCards()
@@ -54,36 +56,22 @@ public class Deck
     {
         cards = cards.OrderBy(c => random.Next()).ToList();
     }
-
-    public void RemoveClass(string color)
+    public Card getFirstCard()
     {
-        cards.RemoveAll(card => card.Color == color);
+        return cards.First();
     }
-
-    public void DistributeCards(List<Player> players, int numberOfCards)
+    private void PopulateFirstCrad()
     {
-        foreach (var player in players)
+        if (cards.Any())
         {
-            for (int i = 0; i < numberOfCards; i++)
-            {
-                var card = Draw();
-                if (card != null)
-                    player.AddCardToHand(card);
-            }
+            var card = cards.First();
+            playedCards.Add(card);
+            cards.RemoveAt(0);
         }
     }
-
-    public void AddToPlayedCards(Card card)
-    {
-        playedCards.Add(card);
-    }
-
     public Card Draw()
     {
-        if (!cards.Any())
-        {
-            RefillDeckFromPlayedCards();
-        }
+
 
         if (cards.Any())
         {
@@ -92,19 +80,5 @@ public class Deck
             return card;
         }
         return null;
-    }
-
-    private void RefillDeckFromPlayedCards()
-    {
-        if (playedCards.Any())
-        {
-            cards.AddRange(playedCards);
-            playedCards.Clear();
-            ShuffleCards();
-        }
-        else
-        {
-            Console.WriteLine("No cards left to refill the deck.");
-        }
     }
 }
