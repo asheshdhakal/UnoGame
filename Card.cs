@@ -13,7 +13,6 @@ namespace UnoGame
         {
             Color = color;
             Value = value;
-            // Use a relative path to the Resources directory
             ImageName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Resources\", imageName);
         }
     }

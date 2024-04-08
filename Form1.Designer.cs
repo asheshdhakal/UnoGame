@@ -65,6 +65,8 @@ namespace UnoGame
             this.pictureBoxPlayer2Card1 = new System.Windows.Forms.PictureBox();
             this.pictureBoxCurrentCard = new System.Windows.Forms.PictureBox();
             this.pictureBoxRenewCard = new System.Windows.Forms.PictureBox();
+            this.buttonCurrentColour = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPlayer3Card1)).BeginInit();
             this.panelPlayer3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPlayer3Card7)).BeginInit();
@@ -103,10 +105,9 @@ namespace UnoGame
             // 
             // pictureBoxPlayer3Card1
             // 
-            this.pictureBoxPlayer3Card1.Location = new System.Drawing.Point(17, 16);
-            this.pictureBoxPlayer3Card1.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBoxPlayer3Card1.Location = new System.Drawing.Point(13, 13);
             this.pictureBoxPlayer3Card1.Name = "pictureBoxPlayer3Card1";
-            this.pictureBoxPlayer3Card1.Size = new System.Drawing.Size(107, 134);
+            this.pictureBoxPlayer3Card1.Size = new System.Drawing.Size(80, 107);
             this.pictureBoxPlayer3Card1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxPlayer3Card1.TabIndex = 1;
             this.pictureBoxPlayer3Card1.TabStop = false;
@@ -120,68 +121,61 @@ namespace UnoGame
             this.panelPlayer3.Controls.Add(this.pictureBoxPlayer3Card2);
             this.panelPlayer3.Controls.Add(this.pictureBoxPlayer3Card3);
             this.panelPlayer3.Controls.Add(this.pictureBoxPlayer3Card1);
-            this.panelPlayer3.Location = new System.Drawing.Point(281, 15);
-            this.panelPlayer3.Margin = new System.Windows.Forms.Padding(4);
+            this.panelPlayer3.Location = new System.Drawing.Point(211, 12);
             this.panelPlayer3.Name = "panelPlayer3";
-            this.panelPlayer3.Size = new System.Drawing.Size(937, 165);
+            this.panelPlayer3.Size = new System.Drawing.Size(703, 132);
             this.panelPlayer3.TabIndex = 2;
             // 
             // pictureBoxPlayer3Card7
             // 
-            this.pictureBoxPlayer3Card7.Location = new System.Drawing.Point(816, 16);
-            this.pictureBoxPlayer3Card7.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBoxPlayer3Card7.Location = new System.Drawing.Point(612, 13);
             this.pictureBoxPlayer3Card7.Name = "pictureBoxPlayer3Card7";
-            this.pictureBoxPlayer3Card7.Size = new System.Drawing.Size(107, 134);
+            this.pictureBoxPlayer3Card7.Size = new System.Drawing.Size(80, 107);
             this.pictureBoxPlayer3Card7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxPlayer3Card7.TabIndex = 11;
             this.pictureBoxPlayer3Card7.TabStop = false;
             // 
             // pictureBoxPlayer3Card5
             // 
-            this.pictureBoxPlayer3Card5.Location = new System.Drawing.Point(560, 16);
-            this.pictureBoxPlayer3Card5.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBoxPlayer3Card5.Location = new System.Drawing.Point(420, 13);
             this.pictureBoxPlayer3Card5.Name = "pictureBoxPlayer3Card5";
-            this.pictureBoxPlayer3Card5.Size = new System.Drawing.Size(107, 134);
+            this.pictureBoxPlayer3Card5.Size = new System.Drawing.Size(80, 107);
             this.pictureBoxPlayer3Card5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxPlayer3Card5.TabIndex = 10;
             this.pictureBoxPlayer3Card5.TabStop = false;
             // 
             // pictureBoxPlayer3Card6
             // 
-            this.pictureBoxPlayer3Card6.Location = new System.Drawing.Point(687, 16);
-            this.pictureBoxPlayer3Card6.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBoxPlayer3Card6.Location = new System.Drawing.Point(515, 13);
             this.pictureBoxPlayer3Card6.Name = "pictureBoxPlayer3Card6";
-            this.pictureBoxPlayer3Card6.Size = new System.Drawing.Size(107, 134);
+            this.pictureBoxPlayer3Card6.Size = new System.Drawing.Size(80, 107);
             this.pictureBoxPlayer3Card6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxPlayer3Card6.TabIndex = 9;
             this.pictureBoxPlayer3Card6.TabStop = false;
             // 
             // pictureBoxPlayer3Card4
             // 
-            this.pictureBoxPlayer3Card4.Location = new System.Drawing.Point(421, 16);
-            this.pictureBoxPlayer3Card4.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBoxPlayer3Card4.Location = new System.Drawing.Point(316, 13);
             this.pictureBoxPlayer3Card4.Name = "pictureBoxPlayer3Card4";
-            this.pictureBoxPlayer3Card4.Size = new System.Drawing.Size(107, 134);
+            this.pictureBoxPlayer3Card4.Size = new System.Drawing.Size(80, 107);
             this.pictureBoxPlayer3Card4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxPlayer3Card4.TabIndex = 8;
             this.pictureBoxPlayer3Card4.TabStop = false;
             // 
             // pictureBoxPlayer3Card2
             // 
-            this.pictureBoxPlayer3Card2.Location = new System.Drawing.Point(159, 16);
-            this.pictureBoxPlayer3Card2.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBoxPlayer3Card2.Location = new System.Drawing.Point(119, 13);
             this.pictureBoxPlayer3Card2.Name = "pictureBoxPlayer3Card2";
-            this.pictureBoxPlayer3Card2.Size = new System.Drawing.Size(107, 134);
+            this.pictureBoxPlayer3Card2.Size = new System.Drawing.Size(80, 107);
             this.pictureBoxPlayer3Card2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxPlayer3Card2.TabIndex = 7;
             this.pictureBoxPlayer3Card2.TabStop = false;
             // 
             // pictureBoxPlayer3Card3
             // 
-            this.pictureBoxPlayer3Card3.Location = new System.Drawing.Point(285, 16);
-            this.pictureBoxPlayer3Card3.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBoxPlayer3Card3.Location = new System.Drawing.Point(214, 13);
             this.pictureBoxPlayer3Card3.Name = "pictureBoxPlayer3Card3";
-            this.pictureBoxPlayer3Card3.Size = new System.Drawing.Size(107, 134);
+            this.pictureBoxPlayer3Card3.Size = new System.Drawing.Size(80, 107);
             this.pictureBoxPlayer3Card3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxPlayer3Card3.TabIndex = 6;
             this.pictureBoxPlayer3Card3.TabStop = false;
@@ -195,78 +189,70 @@ namespace UnoGame
             this.panelPlayer1.Controls.Add(this.pictureBoxPlayer1Card2);
             this.panelPlayer1.Controls.Add(this.pictureBoxPlayer1Card3);
             this.panelPlayer1.Controls.Add(this.pictureBoxPlayer1Card1);
-            this.panelPlayer1.Location = new System.Drawing.Point(299, 599);
-            this.panelPlayer1.Margin = new System.Windows.Forms.Padding(4);
+            this.panelPlayer1.Location = new System.Drawing.Point(224, 479);
             this.panelPlayer1.Name = "panelPlayer1";
-            this.panelPlayer1.Size = new System.Drawing.Size(937, 165);
+            this.panelPlayer1.Size = new System.Drawing.Size(703, 132);
             this.panelPlayer1.TabIndex = 12;
             // 
             // pictureBoxPlayer1Card7
             // 
-            this.pictureBoxPlayer1Card7.Location = new System.Drawing.Point(816, 16);
-            this.pictureBoxPlayer1Card7.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBoxPlayer1Card7.Location = new System.Drawing.Point(612, 13);
             this.pictureBoxPlayer1Card7.Name = "pictureBoxPlayer1Card7";
-            this.pictureBoxPlayer1Card7.Size = new System.Drawing.Size(107, 134);
+            this.pictureBoxPlayer1Card7.Size = new System.Drawing.Size(80, 107);
             this.pictureBoxPlayer1Card7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxPlayer1Card7.TabIndex = 11;
             this.pictureBoxPlayer1Card7.TabStop = false;
             // 
             // pictureBoxPlayer1Card5
             // 
-            this.pictureBoxPlayer1Card5.Location = new System.Drawing.Point(560, 16);
-            this.pictureBoxPlayer1Card5.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBoxPlayer1Card5.Location = new System.Drawing.Point(420, 13);
             this.pictureBoxPlayer1Card5.Name = "pictureBoxPlayer1Card5";
-            this.pictureBoxPlayer1Card5.Size = new System.Drawing.Size(107, 134);
+            this.pictureBoxPlayer1Card5.Size = new System.Drawing.Size(80, 107);
             this.pictureBoxPlayer1Card5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxPlayer1Card5.TabIndex = 10;
             this.pictureBoxPlayer1Card5.TabStop = false;
             // 
             // pictureBoxPlayer1Card6
             // 
-            this.pictureBoxPlayer1Card6.Location = new System.Drawing.Point(687, 16);
-            this.pictureBoxPlayer1Card6.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBoxPlayer1Card6.Location = new System.Drawing.Point(515, 13);
             this.pictureBoxPlayer1Card6.Name = "pictureBoxPlayer1Card6";
-            this.pictureBoxPlayer1Card6.Size = new System.Drawing.Size(107, 134);
+            this.pictureBoxPlayer1Card6.Size = new System.Drawing.Size(80, 107);
             this.pictureBoxPlayer1Card6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxPlayer1Card6.TabIndex = 9;
             this.pictureBoxPlayer1Card6.TabStop = false;
             // 
             // pictureBoxPlayer1Card4
             // 
-            this.pictureBoxPlayer1Card4.Location = new System.Drawing.Point(419, 16);
-            this.pictureBoxPlayer1Card4.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBoxPlayer1Card4.Location = new System.Drawing.Point(314, 13);
             this.pictureBoxPlayer1Card4.Name = "pictureBoxPlayer1Card4";
-            this.pictureBoxPlayer1Card4.Size = new System.Drawing.Size(107, 134);
+            this.pictureBoxPlayer1Card4.Size = new System.Drawing.Size(80, 107);
             this.pictureBoxPlayer1Card4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxPlayer1Card4.TabIndex = 8;
             this.pictureBoxPlayer1Card4.TabStop = false;
             // 
             // pictureBoxPlayer1Card2
             // 
-            this.pictureBoxPlayer1Card2.Location = new System.Drawing.Point(155, 16);
-            this.pictureBoxPlayer1Card2.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBoxPlayer1Card2.Location = new System.Drawing.Point(116, 13);
             this.pictureBoxPlayer1Card2.Name = "pictureBoxPlayer1Card2";
-            this.pictureBoxPlayer1Card2.Size = new System.Drawing.Size(107, 134);
+            this.pictureBoxPlayer1Card2.Size = new System.Drawing.Size(80, 107);
             this.pictureBoxPlayer1Card2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxPlayer1Card2.TabIndex = 7;
             this.pictureBoxPlayer1Card2.TabStop = false;
             // 
             // pictureBoxPlayer1Card3
             // 
-            this.pictureBoxPlayer1Card3.Location = new System.Drawing.Point(285, 16);
-            this.pictureBoxPlayer1Card3.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBoxPlayer1Card3.Location = new System.Drawing.Point(214, 13);
             this.pictureBoxPlayer1Card3.Name = "pictureBoxPlayer1Card3";
-            this.pictureBoxPlayer1Card3.Size = new System.Drawing.Size(107, 134);
+            this.pictureBoxPlayer1Card3.Size = new System.Drawing.Size(80, 107);
             this.pictureBoxPlayer1Card3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxPlayer1Card3.TabIndex = 6;
             this.pictureBoxPlayer1Card3.TabStop = false;
             // 
             // pictureBoxPlayer1Card1
             // 
-            this.pictureBoxPlayer1Card1.Location = new System.Drawing.Point(17, 16);
-            this.pictureBoxPlayer1Card1.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBoxPlayer1Card1.Location = new System.Drawing.Point(13, 13);
             this.pictureBoxPlayer1Card1.Name = "pictureBoxPlayer1Card1";
-            this.pictureBoxPlayer1Card1.Size = new System.Drawing.Size(107, 134);
+            this.pictureBoxPlayer1Card1.Size = new System.Drawing.Size(80, 107);
             this.pictureBoxPlayer1Card1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxPlayer1Card1.TabIndex = 1;
             this.pictureBoxPlayer1Card1.TabStop = false;
@@ -280,18 +266,16 @@ namespace UnoGame
             this.panelPlayer4.Controls.Add(this.pictureBoxPlayer4Card3);
             this.panelPlayer4.Controls.Add(this.pictureBoxPlayer4Card2);
             this.panelPlayer4.Controls.Add(this.pictureBoxPlayer4Card1);
-            this.panelPlayer4.Location = new System.Drawing.Point(16, 31);
-            this.panelPlayer4.Margin = new System.Windows.Forms.Padding(4);
+            this.panelPlayer4.Location = new System.Drawing.Point(12, 25);
             this.panelPlayer4.Name = "panelPlayer4";
-            this.panelPlayer4.Size = new System.Drawing.Size(217, 732);
+            this.panelPlayer4.Size = new System.Drawing.Size(163, 586);
             this.panelPlayer4.TabIndex = 12;
             // 
             // pictureBoxPlayer4Card7
             // 
-            this.pictureBoxPlayer4Card7.Location = new System.Drawing.Point(29, 624);
-            this.pictureBoxPlayer4Card7.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBoxPlayer4Card7.Location = new System.Drawing.Point(22, 499);
             this.pictureBoxPlayer4Card7.Name = "pictureBoxPlayer4Card7";
-            this.pictureBoxPlayer4Card7.Size = new System.Drawing.Size(153, 78);
+            this.pictureBoxPlayer4Card7.Size = new System.Drawing.Size(115, 62);
             this.pictureBoxPlayer4Card7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxPlayer4Card7.TabIndex = 18;
             this.pictureBoxPlayer4Card7.TabStop = false;
@@ -299,60 +283,54 @@ namespace UnoGame
             // pictureBoxPlayer4Card6
             // 
             this.pictureBoxPlayer4Card6.Cursor = System.Windows.Forms.Cursors.Default;
-            this.pictureBoxPlayer4Card6.Location = new System.Drawing.Point(29, 528);
-            this.pictureBoxPlayer4Card6.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBoxPlayer4Card6.Location = new System.Drawing.Point(22, 422);
             this.pictureBoxPlayer4Card6.Name = "pictureBoxPlayer4Card6";
-            this.pictureBoxPlayer4Card6.Size = new System.Drawing.Size(153, 78);
+            this.pictureBoxPlayer4Card6.Size = new System.Drawing.Size(115, 62);
             this.pictureBoxPlayer4Card6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxPlayer4Card6.TabIndex = 17;
             this.pictureBoxPlayer4Card6.TabStop = false;
             // 
             // pictureBoxPlayer4Card5
             // 
-            this.pictureBoxPlayer4Card5.Location = new System.Drawing.Point(29, 431);
-            this.pictureBoxPlayer4Card5.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBoxPlayer4Card5.Location = new System.Drawing.Point(22, 345);
             this.pictureBoxPlayer4Card5.Name = "pictureBoxPlayer4Card5";
-            this.pictureBoxPlayer4Card5.Size = new System.Drawing.Size(153, 78);
+            this.pictureBoxPlayer4Card5.Size = new System.Drawing.Size(115, 62);
             this.pictureBoxPlayer4Card5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxPlayer4Card5.TabIndex = 16;
             this.pictureBoxPlayer4Card5.TabStop = false;
             // 
             // pictureBoxPlayer4Card4
             // 
-            this.pictureBoxPlayer4Card4.Location = new System.Drawing.Point(29, 331);
-            this.pictureBoxPlayer4Card4.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBoxPlayer4Card4.Location = new System.Drawing.Point(22, 265);
             this.pictureBoxPlayer4Card4.Name = "pictureBoxPlayer4Card4";
-            this.pictureBoxPlayer4Card4.Size = new System.Drawing.Size(153, 78);
+            this.pictureBoxPlayer4Card4.Size = new System.Drawing.Size(115, 62);
             this.pictureBoxPlayer4Card4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxPlayer4Card4.TabIndex = 15;
             this.pictureBoxPlayer4Card4.TabStop = false;
             // 
             // pictureBoxPlayer4Card3
             // 
-            this.pictureBoxPlayer4Card3.Location = new System.Drawing.Point(29, 226);
-            this.pictureBoxPlayer4Card3.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBoxPlayer4Card3.Location = new System.Drawing.Point(22, 181);
             this.pictureBoxPlayer4Card3.Name = "pictureBoxPlayer4Card3";
-            this.pictureBoxPlayer4Card3.Size = new System.Drawing.Size(153, 78);
+            this.pictureBoxPlayer4Card3.Size = new System.Drawing.Size(115, 62);
             this.pictureBoxPlayer4Card3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxPlayer4Card3.TabIndex = 14;
             this.pictureBoxPlayer4Card3.TabStop = false;
             // 
             // pictureBoxPlayer4Card2
             // 
-            this.pictureBoxPlayer4Card2.Location = new System.Drawing.Point(29, 130);
-            this.pictureBoxPlayer4Card2.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBoxPlayer4Card2.Location = new System.Drawing.Point(22, 104);
             this.pictureBoxPlayer4Card2.Name = "pictureBoxPlayer4Card2";
-            this.pictureBoxPlayer4Card2.Size = new System.Drawing.Size(153, 78);
+            this.pictureBoxPlayer4Card2.Size = new System.Drawing.Size(115, 62);
             this.pictureBoxPlayer4Card2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxPlayer4Card2.TabIndex = 13;
             this.pictureBoxPlayer4Card2.TabStop = false;
             // 
             // pictureBoxPlayer4Card1
             // 
-            this.pictureBoxPlayer4Card1.Location = new System.Drawing.Point(29, 30);
-            this.pictureBoxPlayer4Card1.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBoxPlayer4Card1.Location = new System.Drawing.Point(22, 24);
             this.pictureBoxPlayer4Card1.Name = "pictureBoxPlayer4Card1";
-            this.pictureBoxPlayer4Card1.Size = new System.Drawing.Size(153, 78);
+            this.pictureBoxPlayer4Card1.Size = new System.Drawing.Size(115, 62);
             this.pictureBoxPlayer4Card1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxPlayer4Card1.TabIndex = 12;
             this.pictureBoxPlayer4Card1.TabStop = false;
@@ -366,88 +344,79 @@ namespace UnoGame
             this.panelPlayer2.Controls.Add(this.pictureBoxPlayer2Card3);
             this.panelPlayer2.Controls.Add(this.pictureBoxPlayer2Card2);
             this.panelPlayer2.Controls.Add(this.pictureBoxPlayer2Card1);
-            this.panelPlayer2.Location = new System.Drawing.Point(1263, 31);
-            this.panelPlayer2.Margin = new System.Windows.Forms.Padding(4);
+            this.panelPlayer2.Location = new System.Drawing.Point(947, 25);
             this.panelPlayer2.Name = "panelPlayer2";
-            this.panelPlayer2.Size = new System.Drawing.Size(217, 732);
+            this.panelPlayer2.Size = new System.Drawing.Size(163, 586);
             this.panelPlayer2.TabIndex = 19;
             // 
             // pictureBoxPlayer2Card7
             // 
-            this.pictureBoxPlayer2Card7.Location = new System.Drawing.Point(29, 624);
-            this.pictureBoxPlayer2Card7.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBoxPlayer2Card7.Location = new System.Drawing.Point(22, 499);
             this.pictureBoxPlayer2Card7.Name = "pictureBoxPlayer2Card7";
-            this.pictureBoxPlayer2Card7.Size = new System.Drawing.Size(153, 78);
+            this.pictureBoxPlayer2Card7.Size = new System.Drawing.Size(115, 62);
             this.pictureBoxPlayer2Card7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxPlayer2Card7.TabIndex = 18;
             this.pictureBoxPlayer2Card7.TabStop = false;
             // 
             // pictureBoxPlayer2Card6
             // 
-            this.pictureBoxPlayer2Card6.Location = new System.Drawing.Point(29, 528);
-            this.pictureBoxPlayer2Card6.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBoxPlayer2Card6.Location = new System.Drawing.Point(22, 422);
             this.pictureBoxPlayer2Card6.Name = "pictureBoxPlayer2Card6";
-            this.pictureBoxPlayer2Card6.Size = new System.Drawing.Size(153, 78);
+            this.pictureBoxPlayer2Card6.Size = new System.Drawing.Size(115, 62);
             this.pictureBoxPlayer2Card6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxPlayer2Card6.TabIndex = 17;
             this.pictureBoxPlayer2Card6.TabStop = false;
             // 
             // pictureBoxPlayer2Card5
             // 
-            this.pictureBoxPlayer2Card5.Location = new System.Drawing.Point(29, 431);
-            this.pictureBoxPlayer2Card5.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBoxPlayer2Card5.Location = new System.Drawing.Point(22, 345);
             this.pictureBoxPlayer2Card5.Name = "pictureBoxPlayer2Card5";
-            this.pictureBoxPlayer2Card5.Size = new System.Drawing.Size(153, 78);
+            this.pictureBoxPlayer2Card5.Size = new System.Drawing.Size(115, 62);
             this.pictureBoxPlayer2Card5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxPlayer2Card5.TabIndex = 16;
             this.pictureBoxPlayer2Card5.TabStop = false;
             // 
             // pictureBoxPlayer2Card4
             // 
-            this.pictureBoxPlayer2Card4.Location = new System.Drawing.Point(29, 331);
-            this.pictureBoxPlayer2Card4.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBoxPlayer2Card4.Location = new System.Drawing.Point(22, 265);
             this.pictureBoxPlayer2Card4.Name = "pictureBoxPlayer2Card4";
-            this.pictureBoxPlayer2Card4.Size = new System.Drawing.Size(153, 78);
+            this.pictureBoxPlayer2Card4.Size = new System.Drawing.Size(115, 62);
             this.pictureBoxPlayer2Card4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxPlayer2Card4.TabIndex = 15;
             this.pictureBoxPlayer2Card4.TabStop = false;
             // 
             // pictureBoxPlayer2Card3
             // 
-            this.pictureBoxPlayer2Card3.Location = new System.Drawing.Point(29, 226);
-            this.pictureBoxPlayer2Card3.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBoxPlayer2Card3.Location = new System.Drawing.Point(22, 181);
             this.pictureBoxPlayer2Card3.Name = "pictureBoxPlayer2Card3";
-            this.pictureBoxPlayer2Card3.Size = new System.Drawing.Size(153, 78);
+            this.pictureBoxPlayer2Card3.Size = new System.Drawing.Size(115, 62);
             this.pictureBoxPlayer2Card3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxPlayer2Card3.TabIndex = 14;
             this.pictureBoxPlayer2Card3.TabStop = false;
             // 
             // pictureBoxPlayer2Card2
             // 
-            this.pictureBoxPlayer2Card2.Location = new System.Drawing.Point(29, 130);
-            this.pictureBoxPlayer2Card2.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBoxPlayer2Card2.Location = new System.Drawing.Point(22, 104);
             this.pictureBoxPlayer2Card2.Name = "pictureBoxPlayer2Card2";
-            this.pictureBoxPlayer2Card2.Size = new System.Drawing.Size(153, 78);
+            this.pictureBoxPlayer2Card2.Size = new System.Drawing.Size(115, 62);
             this.pictureBoxPlayer2Card2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxPlayer2Card2.TabIndex = 13;
             this.pictureBoxPlayer2Card2.TabStop = false;
             // 
             // pictureBoxPlayer2Card1
             // 
-            this.pictureBoxPlayer2Card1.Location = new System.Drawing.Point(29, 30);
-            this.pictureBoxPlayer2Card1.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBoxPlayer2Card1.Location = new System.Drawing.Point(22, 24);
             this.pictureBoxPlayer2Card1.Name = "pictureBoxPlayer2Card1";
-            this.pictureBoxPlayer2Card1.Size = new System.Drawing.Size(153, 78);
+            this.pictureBoxPlayer2Card1.Size = new System.Drawing.Size(115, 62);
             this.pictureBoxPlayer2Card1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxPlayer2Card1.TabIndex = 12;
             this.pictureBoxPlayer2Card1.TabStop = false;
             // 
             // pictureBoxCurrentCard
             // 
-            this.pictureBoxCurrentCard.Location = new System.Drawing.Point(380, 257);
-            this.pictureBoxCurrentCard.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBoxCurrentCard.Location = new System.Drawing.Point(285, 206);
             this.pictureBoxCurrentCard.Name = "pictureBoxCurrentCard";
-            this.pictureBoxCurrentCard.Size = new System.Drawing.Size(139, 183);
+            this.pictureBoxCurrentCard.Size = new System.Drawing.Size(104, 146);
             this.pictureBoxCurrentCard.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxCurrentCard.TabIndex = 12;
             this.pictureBoxCurrentCard.TabStop = false;
@@ -455,27 +424,44 @@ namespace UnoGame
             // 
             // pictureBoxRenewCard
             // 
-            this.pictureBoxRenewCard.Location = new System.Drawing.Point(968, 257);
-            this.pictureBoxRenewCard.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBoxRenewCard.Location = new System.Drawing.Point(726, 206);
             this.pictureBoxRenewCard.Name = "pictureBoxRenewCard";
-            this.pictureBoxRenewCard.Size = new System.Drawing.Size(137, 183);
+            this.pictureBoxRenewCard.Size = new System.Drawing.Size(103, 146);
             this.pictureBoxRenewCard.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxRenewCard.TabIndex = 20;
             this.pictureBoxRenewCard.TabStop = false;
             this.pictureBoxRenewCard.Click += new System.EventHandler(this.pictureBoxRenewCard_Click);
             // 
+            // buttonCurrentColour
+            // 
+            this.buttonCurrentColour.Location = new System.Drawing.Point(507, 272);
+            this.buttonCurrentColour.Name = "buttonCurrentColour";
+            this.buttonCurrentColour.Size = new System.Drawing.Size(75, 23);
+            this.buttonCurrentColour.TabIndex = 21;
+            this.buttonCurrentColour.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(506, 370);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 46);
+            this.button1.TabIndex = 22;
+            this.button1.Text = "UNO";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1505, 784);
+            this.ClientSize = new System.Drawing.Size(1129, 627);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.buttonCurrentColour);
             this.Controls.Add(this.pictureBoxRenewCard);
             this.Controls.Add(this.pictureBoxCurrentCard);
             this.Controls.Add(this.panelPlayer2);
             this.Controls.Add(this.panelPlayer4);
             this.Controls.Add(this.panelPlayer1);
             this.Controls.Add(this.panelPlayer3);
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPlayer3Card1)).EndInit();
@@ -551,6 +537,8 @@ namespace UnoGame
         private PictureBox pictureBoxCurrentCard;
         private PictureBox pictureBoxPlayer4Card5;
         private PictureBox pictureBoxRenewCard;
+        private Button buttonCurrentColour;
+        private Button button1;
     }
 }
 

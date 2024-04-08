@@ -18,43 +18,42 @@ public class Deck
         PopulateFirstCrad();
     }
 
+
     private void InitializeCards()
     {
-        string[] colors = { "red", "yellow", "green", "blue" };
-        foreach (var color in colors)
+        string[] colors = { "red", "green", "blue", "yellow" };
+        string[] values = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "draw2", "reverse", "skip" };
+
+        foreach (string color in colors)
         {
-            // Add numbered cards 0-9. Note: '0' is added once per color, 1-9 twice
-            for (int i = 0; i <= 9; i++)
+            foreach (string value in values)
             {
-                string imageName = $"uno_card-{color}{i}.png";
-                cards.Add(new Card(color, i.ToString(), imageName));
-                if (i > 0) // Add a second set of cards 1-9
+                string imageName = $"uno_card-{color}{value}.png";
+                cards.Add(new Card(color, value, imageName));
+                if (value != "0" && value != "draw2" && value != "reverse" && value != "skip")
                 {
-                    cards.Add(new Card(color, i.ToString(), imageName));
+                    cards.Add(new Card(color, value, imageName));
                 }
             }
-
-            // Add two of each action card per color
-            string[] actions = { "draw2", "reverse", "skip" };
-            foreach (var action in actions)
-            {
-                string imageName = $"uno_card-{color}{action}.png";
-                cards.Add(new Card(color, action, imageName));
-                cards.Add(new Card(color, action, imageName));
-            }
         }
 
-        // Add Wild and Wild Draw Four cards, 4 of each
         for (int i = 0; i < 4; i++)
         {
-            cards.Add(new Card("wild", "wild", "uno_card-wildchange.png"));
-            cards.Add(new Card("wild", "draw4", "uno_card-wilddraw4.png"));
+           /* cards.Add(new Card("wild", "wild", "uno_card-wildchange.png"));
+            cards.Add(new Card("wild", "draw4", "uno_card-wilddraw4.png"));*/
         }
     }
-
-    private void ShuffleCards()
+    public void ShuffleCards()
     {
-        cards = cards.OrderBy(c => random.Next()).ToList();
+        // Implementing Fisher-Yates shuffle
+        int n = cards.Count;
+        for (int i = n - 1; i > 0; i--)
+        {
+            int j = random.Next(i + 1);
+            Card temp = cards[i];
+            cards[i] = cards[j];
+            cards[j] = temp;
+        }
     }
     public Card getFirstCard()
     {
@@ -80,5 +79,11 @@ public class Deck
             return card;
         }
         return null;
+    }
+    public void ReshufflePlayedCards()
+    {
+        cards.AddRange(playedCards);
+        ShuffleCards(); 
+        playedCards.Clear(); 
     }
 }
