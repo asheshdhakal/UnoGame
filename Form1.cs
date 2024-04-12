@@ -16,53 +16,39 @@ namespace UnoGame
         private string cardBackImagePath = @"Resources\uno_card-back.png";
         private Card currentCard;
         private Player currentPlayer;
-
-       
-
-    
-
+        private bool isPlayDirectionClockwise = true;
 
         public Form1()
         {
-       
-
             InitializeComponent();
             InitializeGame();
-            initgae();
+            InitializeGameEnvironment();
             DisplayDeckBack();
+            pictureBoxRenewCard.Click += pictureBoxRenewCard_Click;
 
             string backgroundImageFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Resources\table.jpg");
             if (File.Exists(backgroundImageFilePath))
             {
                 this.BackgroundImage = Image.FromFile(backgroundImageFilePath);
-                this.BackgroundImageLayout = ImageLayout.Stretch; // Adjust this as needed
-            }
-            else
-            {
-                MessageBox.Show("Background image file not found.");
+                this.BackgroundImageLayout = ImageLayout.Stretch;
             }
         }
 
-        private void initgae()
+        private void InitializeGameEnvironment()
         {
             foreach (var player in players)
             {
-                player.Hand.Clear(); // Clear any existing cards
-
+                player.Hand.Clear();
                 for (int i = 0; i < CardsPerPlayer; i++)
                 {
                     player.DrawCard(deck);
                 }
             }
-
-            // Correctly initialize the class-level currentCard with the first card from the playedCards list
-            currentCard = deck.playedCards.First(); // Remove the local declaration and use the class-level currentCard
-
+            currentCard = deck.playedCards.First();
             DisplayCurrentCard(currentCard);
             DisplayCurrentCardDeck(deck.getFirstCard());
             currentPlayer = players[0];
             DisplayCards();
-
             for (int i = 0; i < players[0].Hand.Count; i++)
             {
                 string pictureBoxName = $"pictureBoxPlayer1Card{i + 1}";
@@ -70,34 +56,19 @@ namespace UnoGame
                 if (pictureBox != null)
                 {
                     pictureBox.Enabled = true;
-                    pictureBox.Click += PictureBox_Click; // Subscribe to the Click event
+                    pictureBox.Click += PictureBox_Click;
                 }
             }
         }
-
         private void DisplayDeckBack()
-{
-    string backImagePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "uno_card-back.png");
-    if (File.Exists(backImagePath))
-    {
-        pictureBoxRenewCard.Image = Image.FromFile(backImagePath);
-    }
-    else
-    {
-        MessageBox.Show("Deck back image file not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-    }
-}
-
-        private PictureBox CreateCardPictureBox(string name, int x, int y)
         {
-            PictureBox pb = new PictureBox();
-            pb.Name = name;
-            pb.Size = new Size(71, 96); // Standard card size
-            pb.Location = new Point(x, y);
-            pb.SizeMode = PictureBoxSizeMode.StretchImage;
-            pb.Visible = true;
-            return pb;
+            string backImagePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "uno_card-back.png");
+            if (File.Exists(backImagePath))
+            {
+                pictureBoxRenewCard.Image = Image.FromFile(backImagePath);
+            }
         }
+
         private void DisplayCurrentCard(Card card)
         {
             pictureBoxCurrentCard.Image = Image.FromFile(card.ImageName);
@@ -108,59 +79,61 @@ namespace UnoGame
             pictureBoxRenewCard.Image = Image.FromFile(card.ImageName);
         }
 
-  
         private void InitializeGame()
         {
-            players = new List<Player>();
-            players.Add(new Player(true)); // Human player
-            for (int i = 0; i < 3; i++)
-            {
-                players.Add(new Player(false)); // Computer players
-            }
-
-            Console.WriteLine(players.Count);
-
-        }
-        // Correctly handle the initiation of the game loop.
-        private void InitiateGameLoop()
-        {
-            PlayGame();
+        players = new List<Player>
+    {
+        new Player(true, "Human"),
+        new Player(false, "Computer 1"),
+        new Player(false, "Computer 2"),
+        new Player(false, "Computer 3")};
         }
 
         private bool CanPlayCard(Card selectedCard, Card currentCard)
         {
-            // Check if the current card is not null
-            if (currentCard != null)
+            if (selectedCard.Value == "wild" || selectedCard.Value == "draw4")
             {
-                // Check if the selected card can be played on the current card
-                // A card can be played if:
-                // 1. The color matches the current card's color
-                // 2. The value matches the current card's value
-                // 3. The selected card is a wild card
-                return selectedCard.Color == currentCard.Color ||
-                       selectedCard.Value == currentCard.Value ||
-                       selectedCard.Color == "wild";
+                return true;
             }
-            else
-            {
-                // If the current card is null, return false
-                return false;
-            }
+
+            return (selectedCard.Color == currentCard.Color ||
+                    selectedCard.Value == currentCard.Value ||
+                    selectedCard.Value == "draw2" && currentCard.Value == "draw2");
         }
 
-        // This would be called whenever a card is played
+
         private void UpdateCurrentCardDisplay(Card card)
         {
             pictureBoxCurrentCard.Image = Image.FromFile(card.ImageName);
+            UpdateButtonCurrentColor(card.Color);
         }
 
 
+        private void UpdateButtonCurrentColor(string color)
+        {
+            switch (color)
+            {
+                case "red":
+                    buttonCurrentColour.BackColor = Color.Red;
+                    break;
+                case "green":
+                    buttonCurrentColour.BackColor = Color.Green;
+                    break;
+                case "blue":
+                    buttonCurrentColour.BackColor = Color.Blue;
+                    break;
+                case "yellow":
+                    buttonCurrentColour.BackColor = Color.Yellow;
+                    break;
+                default:
+                    buttonCurrentColour.BackColor = DefaultBackColor;
+                    break;
+            }
+        }
 
         private void DisplayCards()
         {
             string resourcesPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources");
-
-            // Display human player's cards
             for (int i = 0; i < CardsPerPlayer; i++)
             {
                 string pictureBoxName = $"pictureBoxPlayer1Card{i + 1}";
@@ -168,12 +141,18 @@ namespace UnoGame
                 if (pictureBox != null && i < players[0].Hand.Count)
                 {
                     Card card = players[0].Hand[i];
-                    string imageName = card.Color == "wild" ? Path.Combine(resourcesPath, card.ImageName) : Path.Combine(resourcesPath, $"uno_card-{card.Color}{card.Value}.png");
-                    pictureBox.Image = Image.FromFile(imageName);
+                    string imageName = Path.Combine(resourcesPath, $"uno_card-{card.Color}{card.Value}.png");
+                    if (File.Exists(imageName))
+                    {
+                        pictureBox.Image = Image.FromFile(imageName);
+                    }
+                    else
+                    {
+                        // Handle the case where the image file is not found
+                        pictureBox.Image = null;
+                    }
                 }
             }
-
-            // Display backs for computer players' cards
             for (int playerIndex = 1; playerIndex <= 3; playerIndex++)
             {
                 for (int cardIndex = 0; cardIndex < CardsPerPlayer; cardIndex++)
@@ -188,6 +167,7 @@ namespace UnoGame
                 }
             }
         }
+
         private void PlayGame()
         {
             if (currentPlayer.IsHuman)
@@ -198,27 +178,20 @@ namespace UnoGame
             {
                 HandleComputerPlayerTurn(currentPlayer);
             }
-
-            // Check if the game is over
             if (!CheckGameOver())
             {
-                // Switch to the next player after a delay
                 Task.Delay(2000).ContinueWith(_ =>
                 {
                     int currentPlayerIndex = players.IndexOf(currentPlayer);
                     currentPlayerIndex = (currentPlayerIndex + 1) % players.Count;
                     currentPlayer = players[currentPlayerIndex];
-                    PlayGame(); // Recursive call to continue the game
+                    PlayGame();
                 }, TaskScheduler.FromCurrentSynchronizationContext());
             }
         }
 
-
-
-
         private void HandleHumanPlayerTurn()
         {
-            // Enable the picture boxes corresponding to the human player's cards
             for (int i = 0; i < players[0].Hand.Count; i++)
             {
                 string pictureBoxName = $"pictureBoxPlayer1Card{i + 1}";
@@ -226,10 +199,11 @@ namespace UnoGame
                 if (pictureBox != null)
                 {
                     pictureBox.Enabled = true;
-                    pictureBox.Click += PictureBox_Click; // Subscribe to the Click event
+                    pictureBox.Click += PictureBox_Click;
                 }
             }
         }
+
         private void PictureBox_Click(object sender, EventArgs e)
         {
             PictureBox clickedPictureBox = sender as PictureBox;
@@ -237,78 +211,121 @@ namespace UnoGame
             {
                 int cardIndex = int.Parse(clickedPictureBox.Name.Substring(clickedPictureBox.Name.Length - 1)) - 1;
                 Card selectedCard = players[0].Hand[cardIndex];
-
                 if (CanPlayCard(selectedCard, currentCard))
                 {
-                    if (selectedCard.Color == "wild" || selectedCard.Value == "draw4")
+                    if (selectedCard.Value == "draw2")
                     {
-                        ColorDialog colorDialog = new ColorDialog
+                        PlayCard(players[0], selectedCard);
+                        currentCard = selectedCard;
+                        pictureBoxCurrentCard.Image = Image.FromFile(currentCard.ImageName);
+                        HandleDrawTwoCard(currentPlayer);
+                    }
+                    else if (selectedCard.Value == "reverse")
+                    {
+                        PlayCard(players[0], selectedCard);
+                        currentCard = selectedCard;
+                        pictureBoxCurrentCard.Image = Image.FromFile(currentCard.ImageName);
+                        HandleReverseCard();
+                        SwitchToNextPlayer();
+                    }
+                    else if (selectedCard.Value == "skip")
+                    {
+                        PlayCard(players[0], selectedCard);
+                        currentCard = selectedCard;
+                        pictureBoxCurrentCard.Image = Image.FromFile(currentCard.ImageName);
+                        HandleSkipCard(currentPlayer);
+                    }
+                    else if (selectedCard.Color == "wild")
+                    {
+                        string chosenColor = ChooseColor();
+                        if (!string.IsNullOrEmpty(chosenColor))
                         {
-                            AllowFullOpen = false,
-                            AnyColor = false,
-                            FullOpen = false,
-                            CustomColors = new int[] { 0x0000FF, 0x00FF00, 0xFF0000, 0xFFFF00 }, // Red, Green, Blue, Yellow
-                        };
-                        if (colorDialog.ShowDialog() == DialogResult.OK)
-                        {
-                            selectedCard.Color = colorDialog.Color.Name;
-                            buttonCurrentColour.BackColor = colorDialog.Color;
+                            PlayCard(players[0], selectedCard);
+                            currentCard = new Card(chosenColor, selectedCard.Value, selectedCard.ImageName);
+                            pictureBoxCurrentCard.Image = Image.FromFile(currentCard.ImageName);
                             if (selectedCard.Value == "draw4")
                             {
-                                DrawCardsForNextPlayer(4);
+                                // Handle wild draw four card here
+                                HandleDrawFourCard(players[0]); // Pass the current player here
+                            }
+                            else
+                            {
+                                SwitchToNextPlayer();
                             }
                         }
                     }
+                    else
+                    {
+                        PlayCard(players[0], selectedCard);
+                        currentCard = selectedCard;
+                        pictureBoxCurrentCard.Image = Image.FromFile(currentCard.ImageName);
+                        SwitchToNextPlayer();
+                    }
+                }
+            }
+        }
 
-                    PlayCard(players[0], selectedCard);
-                    currentCard = selectedCard;
-                    pictureBoxCurrentCard.Image = Image.FromFile(currentCard.ImageName);
-                    HandleSpecialCardEffects(selectedCard);
+        private async void HandleComputerPlayerTurn(Player player)
+        {
+            Card validCard = FindValidCard(player.Hand, currentCard);
+            if (validCard != null)
+            {
+                if (validCard.Value == "draw2")
+                {
+                    PlayCard(player, validCard);
+                    currentCard = validCard;
+                    UpdateCurrentCardDisplay(currentCard);
+                    UpdateCardDisplay(player);
+                    HandleDrawTwoCard(player);
+                }
+                else if (validCard.Value == "reverse")
+                {
+                    PlayCard(player, validCard);
+                    currentCard = validCard;
+                    UpdateCurrentCardDisplay(currentCard);
+                    UpdateCardDisplay(player);
+                    HandleReverseCard();
+                    SwitchToNextPlayer();
+                }
+                else if (validCard.Value == "skip")
+                {
+                    PlayCard(player, validCard);
+                    currentCard = validCard;
+                    UpdateCurrentCardDisplay(currentCard);
+                    UpdateCardDisplay(player);
+                    HandleSkipCard(player);
+                }
+                else
+                {
+                    PlayCard(player, validCard);
+                    currentCard = validCard;
+                    UpdateCurrentCardDisplay(currentCard);
+                    UpdateCardDisplay(player);
+                    SwitchToNextPlayer();
+                }
+            }
+            else
+            {
+                var drawnCard = deck.Draw();
+                player.Hand.Add(drawnCard);
+                UpdateCardDisplay(player);
+                await Task.Delay(1000);
+                if (CanPlayCard(drawnCard, currentCard))
+                {
+                    PlayCard(player, drawnCard);
+                    currentCard = drawnCard;
+                    UpdateCurrentCardDisplay(currentCard);
+                    SwitchToNextPlayer();
+                }
+                else
+                {
                     SwitchToNextPlayer();
                 }
             }
         }
 
-        private void HandleComputerPlayerTurn(Player player)
-        {
-            // Find a valid card that the computer player can play
-            Card validCard = FindValidCard(player.Hand, currentCard);
-
-            if (validCard != null)
-            {
-                // If a valid card is found, play it and update the UI accordingly
-                PlayCard(player, validCard);
-
-                // Update the current card to the one played by the computer player
-                currentCard = validCard;
-
-                // Update the current card display with the new current card
-                UpdateCurrentCardDisplay(currentCard);
-
-                // Handle any special effects the card may have
-                HandleSpecialCardEffects(validCard);
-
-                // Reflect the computer player's action in their respective PictureBoxes
-                UpdateCardDisplay(player);
-            }
-            else
-            {
-                // If no valid card is found, the computer player draws a card
-                player.DrawCard(deck);
-
-                // Update the computer player's card display to reflect the new card
-                UpdateCardDisplay(player);
-            }
-
-            // Move to the next player's turn
-            SwitchToNextPlayer();
-        }
-
-
-
         private Card FindValidCard(List<Card> hand, Card currentCard)
         {
-            // Check if any card in the player's hand matches the current card's color or value
             foreach (Card card in hand)
             {
                 if (card.Color == currentCard.Color || card.Value == currentCard.Value || card.Color == "wild")
@@ -316,46 +333,37 @@ namespace UnoGame
                     return card;
                 }
             }
-
-            // If no valid card is found, return null
             return null;
         }
+
         private void PlayCard(Player player, Card card)
         {
             deck.playedCards.Add(card);
             player.Hand.Remove(card);
             UpdateCardDisplay(player);
-
-            // Check if the player has won after playing a card
             CheckForWin(player);
         }
+
         private void CheckForWin(Player player)
         {
             if (player.Hand.Count == 0)
             {
-                // Display win message
                 var winMessage = player.IsHuman ? "Congratulations! You've won the game!" : "A computer player has won the game!";
-                MessageBox.Show(winMessage, "Game Over", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
             }
         }
+
         private void UpdateCardDisplay(Player player)
         {
-            int playerIndex = players.IndexOf(player) + 1; // Assuming playerIndex starts from 1 for naming
-
+            int playerIndex = players.IndexOf(player) + 1;
             for (int i = 0; i < CardsPerPlayer; i++)
             {
                 string pictureBoxName = $"pictureBoxPlayer{playerIndex}Card{i + 1}";
                 PictureBox pictureBox = Controls.Find(pictureBoxName, true).FirstOrDefault() as PictureBox;
-
                 if (pictureBox != null)
                 {
                     if (i < player.Hand.Count)
                     {
-                        string imagePath = player.IsHuman ?
-                            Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", player.Hand[i].ImageName) :
-                            Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "uno_card-back.png");
-
+                        string imagePath = player.IsHuman ? Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", player.Hand[i].ImageName) : Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "uno_card-back.png");
                         pictureBox.Image = Image.FromFile(imagePath);
                     }
                     else
@@ -366,194 +374,32 @@ namespace UnoGame
             }
         }
 
-
-        /*private void UpdateCardDisplay(Player player)
-{
-    int playerIndex = players.IndexOf(player) + 1; // Assuming playerIndex starts from 1 for naming
-
-    for (int i = 0; i < CardsPerPlayer; i++)
-    {
-        string pictureBoxName = $"pictureBoxPlayer{playerIndex}Card{i + 1}";
-        PictureBox pictureBox = Controls.Find(pictureBoxName, true).FirstOrDefault() as PictureBox;
-
-        if (pictureBox != null)
+        private void SwitchToNextPlayer(bool skipNextTurn = false)
         {
-            // Temporarily show the front of the cards for all players during testing
-            // Comment this section out before production deployment
-            if (i < player.Hand.Count)
+            int direction = isPlayDirectionClockwise ? 1 : -1;
+            int currentPlayerIndex = players.IndexOf(currentPlayer) + direction;
+
+            if (skipNextTurn)
             {
-                pictureBox.Image = Image.FromFile(player.Hand[i].ImageName);
-            }
-            else
-            {
-                pictureBox.Image = null;
+                currentPlayerIndex += direction;
             }
 
-            // Uncomment below for production to show back of card for computer players
-            *//*
-            if (player.IsHuman)
-            {
-                Image cardImage = i < player.Hand.Count ? Image.FromFile(player.Hand[i].ImageName) : null;
-                pictureBox.Invoke(new Action(() => pictureBox.Image = cardImage));
-            }
-            else
-            {
-                // This line sets the back image for computer players, comment it out for testing
-                // Image backImage = i < player.Hand.Count ? Image.FromFile(cardBackImagePath) : null;
-                // pictureBox.Invoke(new Action(() => pictureBox.Image = backImage));
-            }
-            *//*
-        }
-    }
-}*/
-
-
-
-        private void HandleSpecialCardEffects(Card card)
-        {
-            switch (card.Value)
-            {
-                case "skip":
-                    SwitchToNextPlayer();
-                    break;
-                case "reverse":
-                    ReversePlayerOrder();
-                    break;
-                case "draw2":
-                    DrawCardsForNextPlayer(2);
-                    SwitchToNextPlayer();
-                    break;
-                case "wild":
-                case "draw4":
-                    if (!currentPlayer.IsHuman)
-                    {
-                        // Automatically choose the color for the computer player
-                        card.Color = ChooseColorForComputerPlayer(currentPlayer);
-                        buttonCurrentColour.BackColor = System.Drawing.Color.FromName(card.Color);
-                        if (card.Value == "draw4")
-                        {
-                            DrawCardsForNextPlayer(4);
-                        }
-                    }
-                    else
-                    {
-                        // Show the color dialog for the human player to choose
-                        ColorDialog colorDialog = new ColorDialog
-                        {
-                            AllowFullOpen = false,
-                            AnyColor = false,
-                            FullOpen = false,
-                            CustomColors = new int[] { 0x0000FF, 0x00FF00, 0xFF0000, 0xFFFF00 }, // Red, Green, Blue, Yellow
-                        };
-                        if (colorDialog.ShowDialog() == DialogResult.OK)
-                        {
-                            card.Color = colorDialog.Color.Name; // Assuming the name matches your game's color strings
-                            buttonCurrentColour.BackColor = colorDialog.Color;
-                            if (card.Value == "draw4")
-                            {
-                                DrawCardsForNextPlayer(4);
-                            }
-                        }
-                    }
-                    SwitchToNextPlayer();
-                    break;
-            }
-        }
-        private string ChooseColorForComputerPlayer(Player player)
-        {
-            // Count the occurrences of each color in the computer player's hand
-            var colorCount = player.Hand
-                .Where(card => card.Color != "wild")
-                .GroupBy(card => card.Color)
-                .ToDictionary(group => group.Key, group => group.Count());
-
-            // If the computer has no colored cards left, just return a random color
-            if (colorCount.Count == 0)
-                return new[] { "red", "yellow", "green", "blue" }.OrderBy(c => Guid.NewGuid()).First();
-
-            // Otherwise, select the color which occurs most frequently
-            return colorCount.OrderByDescending(kvp => kvp.Value).First().Key;
-        }
-        private void DrawCardsForNextPlayer(int numCards)
-        {
-            int nextPlayerIndex = (players.IndexOf(currentPlayer) + 1) % players.Count;
-            Player nextPlayer = players[nextPlayerIndex];
-            for (int i = 0; i < numCards; i++)
-            {
-                if (deck.cards.Count == 0)
-                {
-                    deck.ReshufflePlayedCards(); // Reshuffle played cards into the deck
-                }
-                nextPlayer.DrawCard(deck);
-            }
-            UpdateCardDisplay(nextPlayer);
-        }
-
-
-        private void SwitchToNextPlayer()
-        {
-            int currentPlayerIndex = players.IndexOf(currentPlayer);
-            currentPlayerIndex = (currentPlayerIndex + 1) % players.Count;
+            currentPlayerIndex = (currentPlayerIndex + players.Count) % players.Count;
             currentPlayer = players[currentPlayerIndex];
 
             if (!currentPlayer.IsHuman)
             {
-                // Simulate a slight delay for computer player actions for better UX
                 Task.Delay(1000).ContinueWith(t =>
                 {
-                    Invoke(new Action(() =>
-                    {
-                        HandleComputerPlayerTurn(currentPlayer);
-                    }));
+                    Invoke(new Action(() => HandleComputerPlayerTurn(currentPlayer)));
                 });
             }
-            // For human players, the UI awaits user interaction.
         }
-
-
-        private void ReversePlayerOrder()
-        {
-            players.Reverse();
-        }
-
-
-    
-        private Card findValidCard(List<Card> hand, Card currentCard)
-        {
-            foreach (Card card in hand)
-            {
-                if (card.Color == currentCard.Color || card.Value == currentCard.Value || card.Color == "wild")
-                {
-                    return card;
-                }
-            }
-            return null;
-        }
-
-     
-
         private bool CheckGameOver()
         {
-           
             return false;
         }
 
-      
-
-        private void pictureBoxPlayer1Card1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pictureBoxCurrentCard_Click(object sender, EventArgs e)
-        {
-           
-        }
-
-        private void panelPlayer1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
 
         private void pictureBoxRenewCard_Click(object sender, EventArgs e)
         {
@@ -564,20 +410,89 @@ namespace UnoGame
                 {
                     currentPlayer.Hand.Add(drawnCard);
                     UpdateCardDisplay(currentPlayer);
-                }
-                else
-                {
-                    MessageBox.Show("The deck is empty!");
+                    if (!CanPlayCard(drawnCard, currentCard))
+                    {
+                        SwitchToNextPlayer();
+                    }
                 }
             }
         }
 
 
-        private void pictureBoxCurrentCard_Click_1(object sender, EventArgs e)
-        {
+        //Wild and special cards handling starts
 
+        private void HandleDrawTwoCard(Player currentPlayer)
+        {
+            int direction = isPlayDirectionClockwise ? 1 : -1;
+            int nextPlayerIndex = (players.IndexOf(currentPlayer) + direction) % players.Count;
+            Player nextPlayer = players[nextPlayerIndex];
+
+            for (int i = 0; i < 2; i++)
+            {
+                var drawnCard = deck.Draw();
+                if (drawnCard != null)
+                {
+                    nextPlayer.Hand.Add(drawnCard);
+                }
+            }
+
+            UpdateCardDisplay(nextPlayer);
+
+            SwitchToNextPlayer(true);
+        }
+
+        private void HandleDrawFourCard(Player currentPlayer)
+        {
+            int direction = isPlayDirectionClockwise ? 1 : -1;
+            int nextPlayerIndex = (players.IndexOf(currentPlayer) + direction) % players.Count;
+            Player nextPlayer = players[nextPlayerIndex];
+
+            for (int i = 0; i < 4; i++)
+            {
+                var drawnCard = deck.Draw();
+                if (drawnCard != null)
+                {
+                    nextPlayer.Hand.Add(drawnCard);
+                }
+            }
+
+            UpdateCardDisplay(nextPlayer);
+        }
+            private void HandleReverseCard()
+        {
+            isPlayDirectionClockwise = !isPlayDirectionClockwise;
+        }
+        private void HandleSkipCard(Player player)
+        {
+            SwitchToNextPlayer(true);
+        }
+        private string ChooseColor()
+        {
+            Form colorForm = new Form();
+            colorForm.Text = "Choose a color";
+            colorForm.StartPosition = FormStartPosition.CenterScreen;
+            colorForm.FormBorderStyle = FormBorderStyle.FixedDialog;
+            colorForm.MaximizeBox = false;
+            colorForm.MinimizeBox = false;
+
+            Button redButton = new Button { Text = "Red", BackColor = Color.Red, ForeColor = Color.White };
+            Button greenButton = new Button { Text = "Green", BackColor = Color.Green, ForeColor = Color.White };
+            Button blueButton = new Button { Text = "Blue", BackColor = Color.Blue, ForeColor = Color.White };
+            Button yellowButton = new Button { Text = "Yellow", BackColor = Color.Yellow, ForeColor = Color.Black };
+
+            redButton.Click += (sender, e) => { colorForm.DialogResult = DialogResult.OK; colorForm.Tag = "red"; colorForm.Close(); };
+            greenButton.Click += (sender, e) => { colorForm.DialogResult = DialogResult.OK; colorForm.Tag = "green"; colorForm.Close(); };
+            blueButton.Click += (sender, e) => { colorForm.DialogResult = DialogResult.OK; colorForm.Tag = "blue"; colorForm.Close(); };
+            yellowButton.Click += (sender, e) => { colorForm.DialogResult = DialogResult.OK; colorForm.Tag = "yellow"; colorForm.Close(); };
+
+            colorForm.Controls.Add(redButton);
+            colorForm.Controls.Add(greenButton);
+            colorForm.Controls.Add(blueButton);
+            colorForm.Controls.Add(yellowButton);
+
+            colorForm.ShowDialog();
+
+            return colorForm.Tag?.ToString();
         }
     }
-
-
 }

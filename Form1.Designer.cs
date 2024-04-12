@@ -420,7 +420,7 @@ namespace UnoGame
             this.pictureBoxCurrentCard.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxCurrentCard.TabIndex = 12;
             this.pictureBoxCurrentCard.TabStop = false;
-            this.pictureBoxCurrentCard.Click += new System.EventHandler(this.pictureBoxCurrentCard_Click_1);
+         /*   this.pictureBoxCurrentCard.Click += new System.EventHandler(this.pictureBoxCurrentCard_Click_1);*/
             // 
             // pictureBoxRenewCard
             // 
@@ -430,7 +430,7 @@ namespace UnoGame
             this.pictureBoxRenewCard.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxRenewCard.TabIndex = 20;
             this.pictureBoxRenewCard.TabStop = false;
-            this.pictureBoxRenewCard.Click += new System.EventHandler(this.pictureBoxRenewCard_Click);
+      /*      this.pictureBoxRenewCard.Click += new System.EventHandler(this.pictureBoxRenewCard_Click);*/
             // 
             // buttonCurrentColour
             // 
