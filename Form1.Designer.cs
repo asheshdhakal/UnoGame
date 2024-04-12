@@ -66,7 +66,7 @@ namespace UnoGame
             this.pictureBoxCurrentCard = new System.Windows.Forms.PictureBox();
             this.pictureBoxRenewCard = new System.Windows.Forms.PictureBox();
             this.buttonCurrentColour = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.buttonUno = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPlayer3Card1)).BeginInit();
             this.panelPlayer3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPlayer3Card7)).BeginInit();
@@ -420,7 +420,6 @@ namespace UnoGame
             this.pictureBoxCurrentCard.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxCurrentCard.TabIndex = 12;
             this.pictureBoxCurrentCard.TabStop = false;
-         /*   this.pictureBoxCurrentCard.Click += new System.EventHandler(this.pictureBoxCurrentCard_Click_1);*/
             // 
             // pictureBoxRenewCard
             // 
@@ -430,7 +429,6 @@ namespace UnoGame
             this.pictureBoxRenewCard.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxRenewCard.TabIndex = 20;
             this.pictureBoxRenewCard.TabStop = false;
-      /*      this.pictureBoxRenewCard.Click += new System.EventHandler(this.pictureBoxRenewCard_Click);*/
             // 
             // buttonCurrentColour
             // 
@@ -440,21 +438,21 @@ namespace UnoGame
             this.buttonCurrentColour.TabIndex = 21;
             this.buttonCurrentColour.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // buttonUno
             // 
-            this.button1.Location = new System.Drawing.Point(506, 370);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 46);
-            this.button1.TabIndex = 22;
-            this.button1.Text = "UNO";
-            this.button1.UseVisualStyleBackColor = true;
+            this.buttonUno.Location = new System.Drawing.Point(506, 370);
+            this.buttonUno.Name = "buttonUno";
+            this.buttonUno.Size = new System.Drawing.Size(75, 46);
+            this.buttonUno.TabIndex = 22;
+            this.buttonUno.Text = "UNO";
+            this.buttonUno.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1129, 627);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.buttonUno);
             this.Controls.Add(this.buttonCurrentColour);
             this.Controls.Add(this.pictureBoxRenewCard);
             this.Controls.Add(this.pictureBoxCurrentCard);
@@ -538,7 +536,7 @@ namespace UnoGame
         private PictureBox pictureBoxPlayer4Card5;
         private PictureBox pictureBoxRenewCard;
         private Button buttonCurrentColour;
-        private Button button1;
+        private Button buttonUno;
     }
 }
 

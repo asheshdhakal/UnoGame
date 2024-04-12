@@ -16,9 +16,8 @@ public class Deck
         playedCards = new List<Card>();
         InitializeCards();
         ShuffleCards();
-        PopulateFirstCrad();
+        PopulateFirstCard();
     }
-
 
     private void InitializeCards()
     {
@@ -47,7 +46,6 @@ public class Deck
             cards.Add(new Card(color, "draw2", imageName)); // Add two of each Draw Two card
         }
 
-
         foreach (string color in colors)
         {
             // Reverse cards
@@ -67,6 +65,7 @@ public class Deck
             cards.Add(new Card("wild", "draw4", "uno_card-wilddraw4.png"));
         }
     }
+
     public void ShuffleCards()
     {
         // Implementing Fisher-Yates shuffle
@@ -79,11 +78,13 @@ public class Deck
             cards[j] = temp;
         }
     }
+
     public Card getFirstCard()
     {
         return cards.First();
     }
-    private void PopulateFirstCrad()
+
+    private void PopulateFirstCard()
     {
         if (cards.Any())
         {
@@ -92,6 +93,7 @@ public class Deck
             cards.RemoveAt(0);
         }
     }
+
     public Card Draw()
     {
         if (cards.Count == 0)
@@ -117,7 +119,7 @@ public class Deck
     public void ReshufflePlayedCards()
     {
         cards.AddRange(playedCards);
-        ShuffleCards(); 
-        playedCards.Clear(); 
+        ShuffleCards();
+        playedCards.Clear();
     }
 }
