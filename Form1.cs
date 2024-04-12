@@ -21,7 +21,7 @@ namespace UnoGame
         public Form1()
         {
             InitializeComponent();
-            InitializeGame(); // Call InitializeGame here
+            InitializeGame(); 
             InitializeGameEnvironment();
             DisplayDeckBack();
             pictureBoxRenewCard.Click += pictureBoxRenewCard_Click;
@@ -532,14 +532,13 @@ namespace UnoGame
             int currentPlayerIndex = players.IndexOf(currentPlayer);
             int nextPlayerIndex = currentPlayerIndex + direction;
 
-            // Adjust index to stay within valid range
             if (nextPlayerIndex < 0)
             {
-                nextPlayerIndex += players.Count; // Correct negative index
+                nextPlayerIndex += players.Count; 
             }
             else if (nextPlayerIndex >= players.Count)
             {
-                nextPlayerIndex %= players.Count; // Correct overflow
+                nextPlayerIndex %= players.Count; 
             }
 
             Player nextPlayer = players[nextPlayerIndex];
