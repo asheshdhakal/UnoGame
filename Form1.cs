@@ -21,7 +21,7 @@ namespace UnoGame
         public Form1()
         {
             InitializeComponent();
-            InitializeGame();
+            InitializeGame(); // Call InitializeGame here
             InitializeGameEnvironment();
             DisplayDeckBack();
             pictureBoxRenewCard.Click += pictureBoxRenewCard_Click;
@@ -88,12 +88,12 @@ namespace UnoGame
         private void InitializeGame()
         {
             players = new List<Player>
-            {
-                new Player(true, "Human"),
-                new Player(false, "Computer 1"),
-                new Player(false, "Computer 2"),
-                new Player(false, "Computer 3")
-            };
+    {
+        new Player(true, "Human", this),
+        new Player(false, "Computer 1", this),
+        new Player(false, "Computer 2", this),
+        new Player(false, "Computer 3", this)
+    };
         }
 
         private bool CanPlayCard(Card selectedCard, Card currentCard)
@@ -410,7 +410,7 @@ namespace UnoGame
             }
         }
 
-        private void UpdateCardDisplay(Player player)
+        public void UpdateCardDisplay(Player player)
         {
             int playerIndex = players.IndexOf(player) + 1;
             for (int i = 0; i < CardsPerPlayer; i++)
@@ -445,7 +445,7 @@ namespace UnoGame
                 }
             }
         }
-        private void SwitchToNextPlayer(bool skipNextTurn = false)
+        public void SwitchToNextPlayer(bool skipNextTurn = false)
         {
             int direction = isPlayDirectionClockwise ? 1 : -1;
             int currentPlayerIndex = players.IndexOf(currentPlayer) + direction;

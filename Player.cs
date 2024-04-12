@@ -1,24 +1,48 @@
-﻿using System.Collections.Generic;
+﻿using System.Windows.Forms;
 using UnoGame;
 
-public class Player
+namespace UnoGame
 {
-    public List<Card> Hand { get; private set; }
-    public bool IsHuman { get; private set; }
-    public string Name { get; set; } 
-
-    public Player(bool isHuman, string name)
+    public class Player : BasePlayer
     {
-        Hand = new List<Card>();
-        IsHuman = isHuman;
-        Name = name;
+        private Form1 form;
+        public bool IsHuman { get; private set; }
+
+        public Player(bool isHuman, string name, Form1 form) : base(name)
+        {
+            IsHuman = isHuman;
+            this.form = form;
+        }
+
+        public override void DrawCard(Deck deck)
+        {
+            if (Hand.Count >= 7)
+            {
+                if (IsHuman)
+                {
+                    DialogResult result = MessageBox.Show("Your hand is full. You cannot draw more cards.", "Hand Full", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+
+                    if (result == DialogResult.OK)
+                    {
+                        form.SwitchToNextPlayer();
+                    }
+                }
+                else
+                {
+                    form.SwitchToNextPlayer();
+                }
+            }
+            else
+            {
+                base.DrawCard(deck);
+
+                if (IsHuman)
+                {
+                    form.UpdateCardDisplay(this);
+                }
+            }
+        }
     }
 
-    public void DrawCard(Deck deck)
-    {
-        var card = deck.Draw();
-        if (card != null) Hand.Add(card);
-       
 
-    }
 }
