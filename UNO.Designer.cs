@@ -66,6 +66,17 @@ namespace UnoGame
             this.pictureBoxCurrentCard = new System.Windows.Forms.PictureBox();
             this.pictureBoxRenewCard = new System.Windows.Forms.PictureBox();
             this.buttonCurrentColour = new System.Windows.Forms.Button();
+            this.preferencesMenuStrip = new System.Windows.Forms.MenuStrip();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.rulesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.preferencesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.musicToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.onToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.offToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.backgroundToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.woodenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.goldenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.quartzToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPlayer3Card1)).BeginInit();
             this.panelPlayer3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPlayer3Card7)).BeginInit();
@@ -100,6 +111,7 @@ namespace UnoGame
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPlayer2Card1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCurrentCard)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxRenewCard)).BeginInit();
+            this.preferencesMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // pictureBoxPlayer3Card1
@@ -120,7 +132,7 @@ namespace UnoGame
             this.panelPlayer3.Controls.Add(this.pictureBoxPlayer3Card2);
             this.panelPlayer3.Controls.Add(this.pictureBoxPlayer3Card3);
             this.panelPlayer3.Controls.Add(this.pictureBoxPlayer3Card1);
-            this.panelPlayer3.Location = new System.Drawing.Point(211, 12);
+            this.panelPlayer3.Location = new System.Drawing.Point(200, 36);
             this.panelPlayer3.Name = "panelPlayer3";
             this.panelPlayer3.Size = new System.Drawing.Size(703, 132);
             this.panelPlayer3.TabIndex = 2;
@@ -265,9 +277,9 @@ namespace UnoGame
             this.panelPlayer4.Controls.Add(this.pictureBoxPlayer4Card3);
             this.panelPlayer4.Controls.Add(this.pictureBoxPlayer4Card2);
             this.panelPlayer4.Controls.Add(this.pictureBoxPlayer4Card1);
-            this.panelPlayer4.Location = new System.Drawing.Point(12, 25);
+            this.panelPlayer4.Location = new System.Drawing.Point(12, 36);
             this.panelPlayer4.Name = "panelPlayer4";
-            this.panelPlayer4.Size = new System.Drawing.Size(163, 586);
+            this.panelPlayer4.Size = new System.Drawing.Size(163, 575);
             this.panelPlayer4.TabIndex = 12;
             // 
             // pictureBoxPlayer4Card7
@@ -343,9 +355,9 @@ namespace UnoGame
             this.panelPlayer2.Controls.Add(this.pictureBoxPlayer2Card3);
             this.panelPlayer2.Controls.Add(this.pictureBoxPlayer2Card2);
             this.panelPlayer2.Controls.Add(this.pictureBoxPlayer2Card1);
-            this.panelPlayer2.Location = new System.Drawing.Point(947, 25);
+            this.panelPlayer2.Location = new System.Drawing.Point(947, 36);
             this.panelPlayer2.Name = "panelPlayer2";
-            this.panelPlayer2.Size = new System.Drawing.Size(163, 586);
+            this.panelPlayer2.Size = new System.Drawing.Size(163, 575);
             this.panelPlayer2.TabIndex = 19;
             // 
             // pictureBoxPlayer2Card7
@@ -410,6 +422,7 @@ namespace UnoGame
             this.pictureBoxPlayer2Card1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxPlayer2Card1.TabIndex = 12;
             this.pictureBoxPlayer2Card1.TabStop = false;
+            this.pictureBoxPlayer2Card1.Tag = "CardBack";
             // 
             // pictureBoxCurrentCard
             // 
@@ -431,17 +444,112 @@ namespace UnoGame
             // 
             // buttonCurrentColour
             // 
-            this.buttonCurrentColour.Location = new System.Drawing.Point(507, 272);
+            this.buttonCurrentColour.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.buttonCurrentColour.Location = new System.Drawing.Point(516, 303);
             this.buttonCurrentColour.Name = "buttonCurrentColour";
-            this.buttonCurrentColour.Size = new System.Drawing.Size(75, 23);
+            this.buttonCurrentColour.Size = new System.Drawing.Size(52, 49);
             this.buttonCurrentColour.TabIndex = 21;
             this.buttonCurrentColour.UseVisualStyleBackColor = true;
+            // 
+            // preferencesMenuStrip
+            // 
+            this.preferencesMenuStrip.AutoSize = false;
+            this.preferencesMenuStrip.Dock = System.Windows.Forms.DockStyle.None;
+            this.preferencesMenuStrip.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.preferencesMenuStrip.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
+            this.preferencesMenuStrip.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.preferencesMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem1,
+            this.preferencesToolStripMenuItem});
+            this.preferencesMenuStrip.Location = new System.Drawing.Point(12, -3);
+            this.preferencesMenuStrip.Name = "preferencesMenuStrip";
+            this.preferencesMenuStrip.Size = new System.Drawing.Size(1116, 36);
+            this.preferencesMenuStrip.TabIndex = 23;
+            this.preferencesMenuStrip.Text = "Preferences";
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.rulesToolStripMenuItem});
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(65, 32);
+            this.toolStripMenuItem1.Text = "Help";
+            // 
+            // rulesToolStripMenuItem
+            // 
+            this.rulesToolStripMenuItem.Name = "rulesToolStripMenuItem";
+            this.rulesToolStripMenuItem.Size = new System.Drawing.Size(156, 34);
+            this.rulesToolStripMenuItem.Text = "Rules";
+            // 
+            // preferencesToolStripMenuItem
+            // 
+            this.preferencesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.musicToolStripMenuItem,
+            this.backgroundToolStripMenuItem});
+            this.preferencesToolStripMenuItem.Name = "preferencesToolStripMenuItem";
+            this.preferencesToolStripMenuItem.Size = new System.Drawing.Size(118, 32);
+            this.preferencesToolStripMenuItem.Text = "Preferences";
+            // 
+            // musicToolStripMenuItem
+            // 
+            this.musicToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.onToolStripMenuItem,
+            this.offToolStripMenuItem});
+            this.musicToolStripMenuItem.Name = "musicToolStripMenuItem";
+            this.musicToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.musicToolStripMenuItem.Text = "Music";
+            // 
+            // onToolStripMenuItem
+            // 
+            this.onToolStripMenuItem.Name = "onToolStripMenuItem";
+            this.onToolStripMenuItem.Size = new System.Drawing.Size(140, 34);
+            this.onToolStripMenuItem.Text = "On";
+            this.onToolStripMenuItem.Click += new System.EventHandler(this.onToolStripMenuItem_Click);
+            // 
+            // offToolStripMenuItem
+            // 
+            this.offToolStripMenuItem.Name = "offToolStripMenuItem";
+            this.offToolStripMenuItem.Size = new System.Drawing.Size(140, 34);
+            this.offToolStripMenuItem.Text = "Off";
+            this.offToolStripMenuItem.Click += new System.EventHandler(this.offToolStripMenuItem_Click);
+            // 
+            // backgroundToolStripMenuItem
+            // 
+            this.backgroundToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.woodenToolStripMenuItem,
+            this.goldenToolStripMenuItem,
+            this.quartzToolStripMenuItem});
+            this.backgroundToolStripMenuItem.Name = "backgroundToolStripMenuItem";
+            this.backgroundToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.backgroundToolStripMenuItem.Text = "Background";
+            // 
+            // woodenToolStripMenuItem
+            // 
+            this.woodenToolStripMenuItem.Name = "woodenToolStripMenuItem";
+            this.woodenToolStripMenuItem.Size = new System.Drawing.Size(182, 34);
+            this.woodenToolStripMenuItem.Text = "Wooden";
+            this.woodenToolStripMenuItem.Click += new System.EventHandler(this.woodenToolStripMenuItem_Click);
+            // 
+            // goldenToolStripMenuItem
+            // 
+            this.goldenToolStripMenuItem.Name = "goldenToolStripMenuItem";
+            this.goldenToolStripMenuItem.Size = new System.Drawing.Size(182, 34);
+            this.goldenToolStripMenuItem.Text = "Golden";
+            this.goldenToolStripMenuItem.Click += new System.EventHandler(this.goldenToolStripMenuItem_Click);
+            // 
+            // quartzToolStripMenuItem
+            // 
+            this.quartzToolStripMenuItem.Name = "quartzToolStripMenuItem";
+            this.quartzToolStripMenuItem.Size = new System.Drawing.Size(182, 34);
+            this.quartzToolStripMenuItem.Text = "Quartz";
+            this.quartzToolStripMenuItem.Click += new System.EventHandler(this.quartzToolStripMenuItem_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1129, 627);
+            this.Controls.Add(this.preferencesMenuStrip);
             this.Controls.Add(this.buttonCurrentColour);
             this.Controls.Add(this.pictureBoxRenewCard);
             this.Controls.Add(this.pictureBoxCurrentCard);
@@ -485,6 +593,8 @@ namespace UnoGame
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPlayer2Card1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCurrentCard)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxRenewCard)).EndInit();
+            this.preferencesMenuStrip.ResumeLayout(false);
+            this.preferencesMenuStrip.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -525,6 +635,17 @@ namespace UnoGame
         private PictureBox pictureBoxPlayer4Card5;
         private PictureBox pictureBoxRenewCard;
         private Button buttonCurrentColour;
+        private MenuStrip preferencesMenuStrip;
+        private ToolStripMenuItem toolStripMenuItem1;
+        private ToolStripMenuItem rulesToolStripMenuItem;
+        private ToolStripMenuItem preferencesToolStripMenuItem;
+        private ToolStripMenuItem backgroundToolStripMenuItem;
+        private ToolStripMenuItem woodenToolStripMenuItem;
+        private ToolStripMenuItem goldenToolStripMenuItem;
+        private ToolStripMenuItem quartzToolStripMenuItem;
+        private ToolStripMenuItem musicToolStripMenuItem;
+        private ToolStripMenuItem onToolStripMenuItem;
+        private ToolStripMenuItem offToolStripMenuItem;
     }
 }
 

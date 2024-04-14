@@ -3,6 +3,7 @@ using UnoGame;
 
 namespace UnoGame
 {
+    // Represents a player in the Uno game.
     public class Player : BasePlayer
     {
         private Form1 form;
@@ -16,6 +17,7 @@ namespace UnoGame
 
         public override void DrawCard(Deck deck)
         {
+            // check if the hand is full
             if (Hand.Count >= 7)
             {
                 if (IsHuman)
@@ -33,7 +35,9 @@ namespace UnoGame
                 }
             }
             else
-            {
+            {                
+                // draw a card and update the card display if human
+
                 base.DrawCard(deck);
 
                 if (IsHuman)

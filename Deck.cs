@@ -4,11 +4,16 @@ using UnoGame;
 using System.Linq;
 using System.Windows.Forms;
 
+
+// represents a deck of Uno cards
+
 public class Deck
 {
     public List<Card> cards;
     public List<Card> playedCards;
     private Random random = new Random();
+
+    // constructor to initialize the deck
 
     public Deck()
     {
@@ -19,6 +24,7 @@ public class Deck
         PopulateFirstCard();
     }
 
+    // initializes the cards in the deck
     private void InitializeCards()
     {
         cards = new List<Card>();
@@ -64,7 +70,7 @@ public class Deck
             cards.Add(new Card("wild", "draw4", "uno_card-wilddraw4.png"));
         }
     }
-
+    //shuffling the cards in the deck
     public void ShuffleCards()
     {
         int n = cards.Count;
@@ -82,6 +88,7 @@ public class Deck
         return cards.First();
     }
 
+    //adds the first card to the pile of played cards
     private void PopulateFirstCard()
     {
         if (cards.Any())
@@ -91,7 +98,7 @@ public class Deck
             cards.RemoveAt(0);
         }
     }
-
+    // draws a card from the deck
     public Card Draw()
     {
         if (cards.Count == 0)
@@ -112,6 +119,7 @@ public class Deck
         return card;
     }
 
+    // reshuffles the played cards pile into the deck
     public void ReshufflePlayedCards()
     {
         cards.AddRange(playedCards);

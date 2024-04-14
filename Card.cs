@@ -4,7 +4,9 @@ using System.IO;
 namespace UnoGame
 {
     public class Card
-    {
+    {   
+        // represents a card in the Uno game
+
         public string Color { get; set; }
         public string Value { get; set; }
         public string ImageName { get; set; }
